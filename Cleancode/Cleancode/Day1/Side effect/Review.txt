@@ -1,0 +1,75 @@
+Review 2
+The code changes the order.total value, which affects the original order object outside the function.
+public void ComputeDiscountOnTotalAmount(Order order, decimal discountAmount)  
+{  
+    // Fix: Method name should be more concise (e.g., ApplyDiscount).  
+    // Fix: Property 'total' should follow PascalCase if it's public (Total).  
+    // Fix: Use shorthand (order.Total -= discountAmount;).  
+    // Fix: Method return type is void, but it's returning a value (remove return statement or change return type).  
+ 
+    order.total = order.total - discountAmount;  
+Review 3
+The function name is confusing because it uses double negatives, which can lead to misunderstanding and mistakes when calling it.
+  public bool IsDOMNodeNotPresent(string node)  
+{  
+    // Fix: Method name could be clearer – consider renaming to 'IsNodeMissing' to reduce negative logic  
+    // Fix: 'node' parameter name could be more descriptive, e.g., 'nodeId'  
+    // ...
+}  
+ 
+if (!IsDOMNodeNotPresent(node))  
+{  
+    // Fix: Double negative reduces readability – consider inverting method logic  
+    // Instead of checking '!IsDOMNodeNotPresent(node)', use 'IsDOMNodePresent(node)'  
+    // ...
+}
+Review 5
+public Path TravelToTexas(object vehicle)
+{
+    // Problem: Method promises to return a Path, but has no return statement
+    // Problem: Using GetType() and typeof() for type checking violates object-oriented principles
+    // Problem: Explicit casting with 'as' can lead to null reference exceptions
+    // Problem: Magic string "texas" with incorrect casing
+    // Problem: Violates Open/Closed Principle - adding new vehicle types requires modifying this method
+    // Problem: Different vehicle types have different method names (PeddleTo vs DriveTo)
+    if (vehicle.GetType() == typeof(Bicycle))
+    {
+        (vehicle as Bicycle).PeddleTo(new Location("texas"));
+    }
+    else if (vehicle.GetType() == typeof(Car))
+    {
+        (vehicle as Car).DriveTo(new Location("texas"));
+    }
+}
+The code assumes vehicle is always a valid Bicycle or Car, which can cause runtime errors if it's another type. Also, it mutates the vehicle's state but does
+not return a Path as expected.
+Review 6
+6th 
+ 
+public void CreateFile(string name, bool temp = false)
+{
+    // Problem: Boolean parameter indicates the method is doing two different things
+    // Problem: String concatenation for file paths is error-prone and not cross-platform
+    // Problem: Magic string "./temp/" hardcoded in the method
+    // Problem: Method name "Touch" is unclear and doesn't communicate its purpose well
+    // Problem: Violates Single Responsibility Principle by handling two different use cases
+    if (temp)
+    {
+        Touch("./temp/" + name);
+    }
+    else
+    {
+        Touch(name);
+    }
+}
+ 
+The code creates a file in different locations based on the temp flag, which can lead to unexpected file placements.
+Review 8
+The function might create a menu differently based on the cancellable flag, which could lead to inconsistent behavior in how menus are handled.
+public void CreateMenu(string title, string body, string buttonText, bool cancellable)
+{
+    // Fix: Method name could be more descriptive (e.g., ShowMenu or DisplayMenu).  
+    // Fix: Parameter names should follow consistent casing; 'cancellable' should be 'isCancellable' for clarity.  
+    // Fix: If 'title', 'body', or 'buttonText' can be null, consider adding null checks.  
+    // Fix: Consider using an options object if more parameters are expected in the future to improve readability.  
+}
