@@ -1,0 +1,77 @@
+
+REVIEW 1
+//Avoid using bad names
+
+int d; // elapsed time in days
+Sol- No proper naming convention is here
+int elapsedTimeInDays
+
+REVIEW 2
+var dataFromDb = db.GetFromService().ToList(); // Get List of employees 
+Sol-Rename to employees or employeeList to be more specific
+var employees = db.GetFromService().ToList();
+
+REVIEW 3
+int iCounter;
+string strFullName;
+DateTime dModifiedDate;
+Sol-int counter; // Removed Hungarian notation
+string strFullName;
+string fullName; // Renamed to camelCase
+DateTime dModifiedDate;
+DateTime modifiedDate; // Renamed to camelCase
+
+REVIEW 4
+public bool IsShopOpen(string pDay, int pAmount)
+{
+    // some logic
+}
+SOL-public bool IsShopOpen(string day, int amount) // Renamed parameters to camelCase
+ 
+
+REVIEW 5
+const int DAYS_IN_WEEK = 7;
+const int daysInMonth = 30;
+var songs = new List<string> { 'Back In Black', 'Stairway to Heaven', 'Hey Jude' };
+var Artists = new List<string> { 'ACDC', 'Led Zeppelin', 'The Beatles' };
+
+bool EraseDatabase() {}
+bool Restore_database() {}
+
+class animal {}
+class Alpaca {}
+SOL-SOL-const int DaysInWeek = 7; // PascalCase for constants
+const int DaysInMonth = 30; // PascalCase for constants
+var songs = new List<string> { "Back In Black", "Stairway to Heaven", "Hey Jude" }; // Fixed quote
+var artists = new List<string> { "ACDC", "Led Zeppelin", "The Beatles" }; // Renamed to camelCase
+class Animal {} // PascalCase for class name
+class Alpaca {} // Correct PascalCase
+REVIEW 6
+
+public class Employee
+{
+    public Datetime sWorkDate { get; set; } // get set Start Working Date
+    public Datetime modTime { get; set; } // get set Modification Time
+}
+SOL-
+public Datetime StartWorkDate { get; set; }
+public Datetime ModificationTime { get; set; }
+
+REVIEW 7
+var employeephone;
+
+public double CalculateSalary(int workingdays, int workinghours)
+{
+    // some logic
+} 
+SOL-var employeephone;
+var employeePhone; // Renamed to camelCase
+ 
+ 
+ 
+public double CalculateSalary(int workingdays, int workinghours)
+{
+    // some logic
+}
+public double CalculateSalary(int workingDays, int workingHours) // Renamed to camelCase
+ 
