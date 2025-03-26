@@ -1,0 +1,55 @@
+public class OrderService
+{
+    private const decimal TaxRate = 0.08m;
+
+    public void ProcessOrder(Order order)
+    {
+        ValidateOrder(order);
+        order.Total = CalculateTotal(order);
+        SaveToDatabase(order);
+        SendConfirmationEmail(order.CustomerEmail, order.Total);
+    }
+
+    public void ApplyDiscount(Order order, decimal discountPercent)
+    {
+        ValidateOrder(order);
+        order.Total = CalculateTotal(order) * (1 - discountPercent);
+        UpdateDatabase(order);
+    }
+
+    private void ValidateOrder(Order order)
+    {
+        if (order == null)
+            throw new ArgumentNullException(nameof(order));
+        if (order.Items == null || order.Items.Count == 0)
+            throw new InvalidOperationException("Order has no items");
+    }
+
+    private decimal CalculateTotal(Order order)
+    {
+        decimal subtotal = order.Items.Sum(item => item.Price * item.Quantity);
+        decimal tax = subtotal * TaxRate;
+        return subtotal + tax;
+    }
+
+    private void SaveToDatabase(Order order)
+    {
+        // Logic to save the order
+    }
+
+    private void UpdateDatabase(Order order)
+    {
+        // Logic to update the order
+    }
+
+    private void SendConfirmationEmail(string customerEmail, decimal total)
+    {
+        // Logic to send an email
+    }
+}
+Extracted CalculateTotal to avoid repeating subtotal and tax calculations.
+Extracted ValidateOrder to prevent duplicate validation logic
+Each method now has a single responsibility, making the code easier to understand and modify.
+Constants (TaxRate) replace magic numbers, making tax rate changes simpler.
+Database interactions (SaveToDatabase, UpdateDatabase) are abstracted, making future changes (e.g., switching databases) easier.
+Email sending logic is now in a separate method (SendConfirmationEmail) to maintain separation of concerns.
